@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Signin";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    <title>@ViewData["Title"] - TestWeb</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <!--<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/popper.min.js"></script>-->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="~/lib/bootbox/bootbox.js"></script>
+    <title></title>
+</head>
+<script type="text/javascript">
+    function context() {
+        return false;
+    }
+    document.oncontextmenu = context;
+</script>
+@{
+    if (ViewBag.LoginFailedFlag == "Y")
+    {
+            <script type="text/javascript">
+                var login_failedFlag = "@ViewBag.LoginFailedFlag";
+                if (login_failedFlag == 'Y') {
+                    $(document).ready(function () {
+                        bootbox.alert("Please check if your account and password are correct!!");
+                    })
+                }
+            </script>
+    }
+}
+<body>
+    <div class="container text-center centered">
+        <form name="FrmLogin" class="form-signin" asp-action="Signin" asp-controller="Account" method="post">
+            <h1>TestWeb</h1>
+            <div class="row">
+                <input type="text" class="form-control" name="username" placeholder="Account" autocomplete="off" required />
+                <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off" required />
+                <button type="submit" class="btn btn-primary btn-block" name="login" id="login" title="login">Login</button>
+            </div>         
+        </form>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+</body>
+</html>
