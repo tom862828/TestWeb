@@ -6,12 +6,12 @@ using TestWeb.Controllers;
 
 namespace TestWeb.Repositories
 {
-    public class DataConnection : IDisposable
+    public class DbConnection : IDisposable
     {
         private IDbConnection? db = null;
         private string _connectStr;
         private readonly ILogger<HomeController>? _logger;
-        public DataConnection()
+        public DbConnection()
         {        
             string connectionStr = @"server=localhost;user id=DevAuth;password=Dev123456;database=DevDb;port=3306;";
             _connectStr = connectionStr;

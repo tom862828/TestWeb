@@ -22,7 +22,7 @@ namespace TestWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Signin(string username, string password)
         {
-            using (DataConnection dc = new DataConnection())
+            using (DbConnection dc = new DbConnection())
             {
                 string sql = @"select * from users where User_name = @User_name and User_password = @User_password";
                 var user = (await dc.QueryAsync<Account>(sql, new { User_name = username.ToUpper(), User_password = password })).FirstOrDefault();
