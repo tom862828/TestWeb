@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using log4net;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -6,11 +7,14 @@ namespace TestWeb.Filters
 {
     public class SessionTimeoutAttribute : ActionFilterAttribute
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(SessionTimeoutAttribute));
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var session = context.HttpContext.Session;
             var controller = context.RouteData.Values["controller"];
             var action = context.RouteData.Values["action"];
+
+            log.Debug("Session ID: " + session.Id);
 
             if (controller.Equals("Account") && action.Equals("Signin"))
             {

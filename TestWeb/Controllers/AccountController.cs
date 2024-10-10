@@ -4,15 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TestWeb.Models;
 using TestWeb.Repositories;
+using log4net;
 
 namespace TestWeb.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ILogger<AccountController> _logger;
-        public AccountController(ILogger<AccountController> logger)
+        private static readonly ILog log = LogManager.GetLogger(typeof(AccountController));
+        public AccountController()
         {
-            _logger = logger;
+            //Do nothing
         }
         public IActionResult Signin()
         {            
