@@ -1,11 +1,20 @@
-using Microsoft.AspNetCore.Antiforgery;
+using log4net.Config;
+using log4net;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
-using System;
+using MySqlConnector.Logging;
 using TestWeb.Filters;
-using static System.Collections.Specialized.BitVector32;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Setup log4net cofig
+var logRepository = LogManager.GetRepository(System.Reflection.Assembly.GetEntryAssembly());
+XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+var log = LogManager.GetLogger(typeof(Program));
+MySqlConnectorLogManager.Provider = new Log4netLoggerProvider();
+
+// Output the default logging to log4net
+builder.Logging.ClearProviders().AddConsole().AddLog4Net();
 
 // Add services to encrypt and decrypt data (e.g: private key to encrypt and decrypt antiforgery token)
 builder.Services.AddDataProtection()
